@@ -1,10 +1,15 @@
 import React from 'react';
-import { useStyle as StyledSection } from './useStyle';
+import { useInView } from 'react-intersection-observer'
+import { useStyle as StyledSection } from './useStyle'
 
-// eslint-disable-next-line react/prop-types
-export default function Section({ children }) {
+export default function Section(props) {
+  const { children, id } = props
+  const [ref, inView] = useInView({
+    threshold: 0.05
+  })
+  if (inView) console.log(inView, id)
   return (
-    <StyledSection>
+    <StyledSection ref={ref}>
       {children}
     </StyledSection>
   );

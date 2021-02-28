@@ -1,28 +1,29 @@
 import React from 'react'
+import Container from './components/Container';
 import Section from './components/Section';
 
 function App() {
   return (
-    <div className="container">
-      <Section>
+    <Container>
+      <Section id="1">
         1
       </Section>
-      <Section>
+      <Section id="2">
         2
       </Section>
-      <Section>
+      <Section id="3">
         3
       </Section>
-      <Section>
+      <Section id="4">
         4
       </Section>
-      <Section>
+      <Section id="5">
         5
       </Section>
-      <Section>
+      <Section id="6">
         6
       </Section>
-    </div>
+    </Container>
   );
 }
 
