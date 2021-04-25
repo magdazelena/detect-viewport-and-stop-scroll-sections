@@ -11,8 +11,8 @@ function App() {
       <Section id="2">
         2
       </Section>
-      <Section id="3">
-        3
+      <Section id="3" manual>
+        <Button />
       </Section>
       <Section id="4">
         4
@@ -27,4 +27,6 @@ function App() {
   );
 }
 
-export default App;
+export default App
+
+const Button = (props) => (<button onClick={props.resumeScroll}>Trigger</button>)

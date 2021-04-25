@@ -5,8 +5,8 @@ export default function Container({ children }) {
     console.log(visible, id)
   }
   return <div className="container">
-    {children.map((child, index) => {
-      return React.cloneElement(child, { onVisibilityChange })
+    {children.map((child, key) => {
+      return React.cloneElement(child, { key, onVisibilityChange })
     })}
   </div>
 }
