@@ -25,4 +25,9 @@ export const useStyle = styled.section`
   height: 100vh;
   overflow: hidden;
   ${calculateBackgrounds()};
+  color: black;
+  font-size: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

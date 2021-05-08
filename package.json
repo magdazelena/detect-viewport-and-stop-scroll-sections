@@ -1,6 +1,6 @@
 {
   "homepage": "https://magdazelena.github.io/detect-viewport-and-stop-scroll-sections",
-  "name": "section-scroll-trigger",
+  "name": "detect-viewport-and-stop-scroll-sections",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
