@@ -53,8 +53,6 @@ export default function Section(props) {
 
     scrollListener = () => {
       clearTimeout(timeoutId);
-
-      // scroll is finished when either the position has been reached, or 100ms have elapsed since the last scroll event
       if (container.scrollTop === position) {
         finished();
       } else {
