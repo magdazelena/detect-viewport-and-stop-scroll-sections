@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useInView } from 'react-intersection-observer'
 import { useStyle as StyledSection } from './useStyle'
 
@@ -10,9 +10,8 @@ export default function Section(props) {
     manual
   } = props
   const [visible, setVisible] = useState(false) //previous state
-  const [pos, setPos] = useState({ x: null, y: null })
+  const [y, setY] = useState(null)
   const ref = useRef()
-  const [bounds, setBounds] = useState()
   const [inViewRef, inView] = useInView({
     threshold: [0.05, 0.9]
   })
@@ -25,15 +24,11 @@ export default function Section(props) {
     [inViewRef],
   )
 
-  const stopScroll = () => {
-    setPos({ x: 0, y: getTopPosition() })
+  const stopScroll = (position) => {
+    setY(position)
   }
   const resumeScroll = () => {
-    if (ref.current && pos.y) window.scrollTo(0, pos.y + window.innerHeight)
-    setPos({
-      x: null,
-      y: null
-    })
+    setY(null)
   }
 
   async function scrollToPosition(container, position) {
@@ -81,21 +76,26 @@ export default function Section(props) {
     if (!node) return null
     return node.getBoundingClientRect().top - document.body.getBoundingClientRect().top
   }
-  const monitorScroll = useCallback(() => {
-    if (pos.x === null && pos.y === null) return
-    window.scrollTo(pos.x, pos.y)
-  }, [pos.y])
+  const monitorScroll = () => {
+    if (y === null) return
+    window.scrollTo(0, y)
+  }
+
   useEffect(() => {
     if (!manual) return
-    monitorScroll()
-  }, [manual, window.scrollY])
+    window.addEventListener('scroll', monitorScroll, false)
+    return () => {
+      window.removeEventListener('scroll', monitorScroll, false)
+    }
+  }, [y])
+
   useEffect(() => {
     if (inView !== visible) {
       setVisible(inView)
       onVisibilityChange(inView, id)
       if (!inView || !manual) return
       if (getTopPosition()) {
-        scrollToPosition(window, getTopPosition()).then(stopScroll)
+        scrollToPosition(window, getTopPosition()).then(() => stopScroll(getTopPosition()))
       }
     }
   }, [inView])
