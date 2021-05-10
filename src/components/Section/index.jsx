@@ -7,6 +7,7 @@ export default function Section(props) {
     children,
     id,
     onVisibilityChange,
+    onScrollResume,
     manual
   } = props
   const [visible, setVisible] = useState(false) //previous state
@@ -29,6 +30,7 @@ export default function Section(props) {
   }
   const resumeScroll = () => {
     setY(null)
+    onScrollResume()
   }
 
   async function scrollToPosition(container, position) {

@@ -2,6 +2,7 @@ import React from 'react'
 import SnackbarProvider from 'react-simple-snackbar'
 import Container from './components/Container';
 import Section from './components/Section';
+import Button from './components/Button'
 
 function App() {
   return (
@@ -31,5 +32,3 @@ function App() {
 }
 
 export default App
-
-const Button = (props) => (<button onClick={props.resumeScroll}>Click to resume scrolling</button>)

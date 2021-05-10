@@ -9,9 +9,12 @@ export default function Container({ children }) {
     if (visible) openTopbar(`Section ${id} is visible`)
     if (!visible) openBottombar(`Section ${id} is not visible`)
   }
+  const onScrollResume = () => {
+    openBottombar('Scrolling resumed')
+  }
   return <div className="container">
     {children.map((child, key) => {
-      return React.cloneElement(child, { key, onVisibilityChange })
+      return React.cloneElement(child, { key, onVisibilityChange, onScrollResume })
     })}
   </div>
 }
